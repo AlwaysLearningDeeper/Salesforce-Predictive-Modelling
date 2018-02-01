@@ -6,7 +6,7 @@ import csv
 
 LEARNING_RATE = 0.001
 DROPOUT = 0.1
-EPOCH = 5
+EPOCH = 100000
 
 TRAIN = pd.read_csv('../data/train.txt')
 TEST = pd.read_csv('../data/test.txt')
@@ -23,22 +23,31 @@ for l in categorical:
 def main():
     # Deep Neural Network Regressor with the training set which contain the data split by train test split
     prepro()
-    regressor = model()
-    regressor.fit(input_fn=lambda: input_fn_train(), steps=100000)
 
 
+    regressor = model(EPOCH,DROPOUT,LEARNING_RATE)
+    regressor.fit(input_fn=lambda: input_fn_train(), steps=EPOCH)
     # Evaluation on the test set created by train_test_split
-    ev = regressor.evaluate(input_fn=lambda: input_fn_train(), steps=1)
+    ev = regressor.evaluate(input_fn=lambda: input_fn_eval(), steps=1)
     loss_score1 = ev["loss"]
-    print("Final Loss on the testing set: {0:f}".format(loss_score1))
+    print('E'+str(EPOCH)+'-D'+str(DROPOUT)+'-L'+str(LEARNING_RATE)+" Final Loss on the testing set: {0:f}".format(loss_score1))
 
-def model():
+    EPOCH=100
+    regressor = model(EPOCH,DROPOUT,LEARNING_RATE)
+    regressor.fit(input_fn=lambda: input_fn_train(), steps=EPOCH)
+    # Evaluation on the test set created by train_test_split
+    ev = regressor.evaluate(input_fn=lambda: input_fn_eval(), steps=1)
+    loss_score1 = ev["loss"]
+
+    print('E'+str(EPOCH)+'-D'+str(DROPOUT)+'-L'+str(LEARNING_RATE)+" Final Loss on the testing set: {0:f}".format(loss_score1))
+
+def model(EPOCH,DROPOUT,LEARNING_RATE):
     feature_cols = [tf.contrib.layers.real_valued_column("", dimension=2)]
 
     # Model
     tf.logging.set_verbosity(tf.logging.ERROR)
     regressor = tf.contrib.learn.DNNRegressor(feature_columns=feature_cols,
-                                              model_dir='model',
+                                              model_dir='model\model-E'+str(EPOCH)+'-D'+str(DROPOUT)+'-L'+str(LEARNING_RATE),
                                               activation_fn=tf.nn.relu,
                                               hidden_units=[200, 100, 50, 25, 12],
                                               dropout=0.1,
@@ -64,21 +73,11 @@ def input_fn_train(): # returns x, y
 
 
 def input_fn_eval(): # returns x, y
-    return tf.convert_to_tensor(np.array(TRAIN[60:])), tf.convert_to_tensor(np.array(TARGET[60:]))
+    return tf.convert_to_tensor(np.array(TRAIN[60😏)), tf.convert_to_tensor(np.array(TARGET[60😏))
 
 #metrics = estimator.evaluate(input_fn=input_fn_eval, steps=10)
 def input_fn_predict(): # returns x, None
     return tf.convert_to_tensor(np.array(TEST))
 
-if __name__ == "__main__":
+if name == "main":
   main()
-
-
-
-
-
-
-
-
-
-
