@@ -41,6 +41,7 @@ def model():
                                               model_dir='model',
                                               activation_fn=tf.nn.relu,
                                               hidden_units=[200, 100, 50, 25, 12],
+                                              dropout=0.1,
                                               optimizer=tf.train.ProximalAdagradOptimizer(
                                                 learning_rate=0.1,
                                                 l1_regularization_strength=0.001
