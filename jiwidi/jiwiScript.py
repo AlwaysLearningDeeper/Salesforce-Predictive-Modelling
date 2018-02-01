@@ -31,7 +31,7 @@ def main():
     ev = regressor.evaluate(input_fn=lambda: input_fn_train(), steps=1)
     loss_score1 = ev["loss"]
     print("Final Loss on the testing set: {0:f}".format(loss_score1))
-    
+
 def model():
     feature_cols = [tf.contrib.layers.real_valued_column("", dimension=2)]
 
@@ -39,8 +39,13 @@ def model():
     tf.logging.set_verbosity(tf.logging.ERROR)
     regressor = tf.contrib.learn.DNNRegressor(feature_columns=feature_cols,
                                               model_dir='model',
-                                              activation_fn=tf.nn.relu, hidden_units=[200, 100, 50, 25, 12])  # ,
-    # optimizer = tf.train.GradientDescentOptimizer( learning_rate= 0.1 ))
+                                              activation_fn=tf.nn.relu,
+                                              hidden_units=[200, 100, 50, 25, 12],
+                                              optimizer=tf.train.ProximalAdagradOptimizer(
+                                                learning_rate=0.1,
+                                                l1_regularization_strength=0.001
+                                                )
+    )
 
 
     return regressor
