@@ -2,6 +2,7 @@
 datasets/*
 jiwidi/dnn/model/
 data/
+venv/
 
 
 
