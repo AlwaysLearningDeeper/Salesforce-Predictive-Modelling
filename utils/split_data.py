@@ -13,5 +13,5 @@ shuffled_data = data.sample(frac=1,replace=False,random_state=SEED)
 dev = shuffled_data[0:nr_dev_items]
 train = shuffled_data[nr_dev_items:len(data)]
 
-dev.to_csv('dev.csv',index=False)
-train.to_csv('train.csv',index=False)
+dev.to_csv('../data/dev.csv',index=False)
+train.to_csv('../data/train.csv',index=False)
