@@ -1,0 +1,14 @@
+
+
+El trabajo desarrollado está recogido en un notebook (trabajo.ipynb). Hemos incluido también este archivo en formato pdf a fin de facilitar la lectura. Recomendamos la lectura completa de alguno de esos 2 archivos para poder ver con todo lujo de detalles el trabajo llevado a cabo por nuestro equipo.
+
+Durante la exploración de los datos, un analisis estadística de las de distribución de la variable ha encontrado valores muy disparados de skewedness y kurtosis. Hemos tomado la decisión de realizar una detección de outliers mediante la técnica de la distancia intercuartil y eliminarlos durante el proceso de entrenamiento. Una comparativa de resultados ha demostrado una mejora evidente en la bondad de los modelos obtenidos. 
+
+En lo referente al resto de variables, hemos condensado la variable "Socio_Demo_01" en los 11 valores más comunes debido al excesivo número de valores que toma esta variable. Todas las variables categorícas se han convertido a un formato de vectores one-hot para su posterior uso por los diferentes modelos. No hemos detectado ninguna característica adicional de la que sacar ventaja. El análisis completo y sus respectivas gráficas se pueden encontrar en el notebook.
+
+A la hora de seleccionar el modelo, en primer lugar hemos evaluado un elevado número de parámetros y modelos (hemos incluido en el trabajo los resultados que hemos considerado que tenían interés por sus resultados o los efectos de cambiar parámetros) mediante una validación cruzada en 5 bloques, con el fin de obtener una aproximación lo más fiel posible de la capacidad de generalización de los diferentes modelos cuando se enfrentan a datos que no han visto nunca. Hemos evaluado los resultados respecto a 3 métricas: Ráiz del error cuadrático medio (RMSE), media del error absoluto (MAE) y a la mediana del error (MAD). Nos hemos fijado especialmente en la última métrica debido a que no se ve afectada por posibles outliers y porque muestra de manera clara y comprensible cual es el funcionamiento "medio" de un modelo. De nuevo, los resultados están presentados en el notebook.
+
+Después de esta comparativa, se ha realizado una selección de aquellos modelos que obtenían mejores resultados para obtener un conjunto de modelos heterogeneos. El modelos final es un ensemble que combina las predicciones de estos modelos individuales mediante la media aritmética. Este modelo se entrena con todo el conjunto de datos disponibles y se usa para emitir la predicción final.
+
+Atentamente,
+El equipo Always Learning Deeper
