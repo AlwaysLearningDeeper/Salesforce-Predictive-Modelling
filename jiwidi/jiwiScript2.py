@@ -15,10 +15,11 @@ TRAIN = pd.read_csv('../data/train.csv')
 TRAIN.fillna('', inplace=True)
 DEV = pd.read_csv('../data/dev.csv')
 DEV.fillna('', inplace=True)
-
+PREDICT = pd.read_csv('../data/original/Dataset_Salesforce_Predictive_Modelling_TEST.txt')
 #Read target data
 TARGET_TRAIN = TRAIN["Poder_Adquisitivo"]#.as_matrix()
 TARGET_DEV = DEV["Poder_Adquisitivo"]#.as_matrix()
+
 
 #Drop target data from training data and id
 TRAIN = TRAIN.drop("ID_Customer", axis=1).drop("Poder_Adquisitivo", axis=1)
@@ -190,17 +191,20 @@ def build_estimator(model_dir, model_type):
       session_config=tf.ConfigProto(device_count={'GPU': 0}))
 
   if model_type == 'wide':
+    print('Wide estimator')
     return tf.estimator.LinearRegressor(
         model_dir=model_dir,
         feature_columns=wide_columns,
         config=run_config)
   elif model_type == 'deep':
+    print('Deep estimator')
     return tf.estimator.DNNRegressor(
         model_dir=model_dir,
         feature_columns=deep_columns,
         hidden_units=hidden_units,
         config=run_config)
   else:
+    print('Wide & deep estimator')
     return tf.estimator.DNNLinearCombinedRegressor(
         model_dir=model_dir,
         linear_feature_columns=wide_columns,
@@ -252,6 +256,14 @@ def input_fn_eval(): # returns x, y
         dict[column] = tf.convert_to_tensor(np.array(DEV[column]))
 
     return dict, tf.convert_to_tensor(np.array(TARGET_DEV))
+
+def input_fn_evaluate():
+    dict = {}
+
+    for column in list(PREDICT.columns):
+        dict[column] = tf.convert_to_tensor(np.array(PREDICT[column]))
+
+    return dict
 def main(unused_argv):
   # Clean up the model directory if present
   shutil.rmtree(FLAGS.model_dir, ignore_errors=True)
@@ -267,8 +279,11 @@ def main(unused_argv):
     print('Results at epoch', (n + 1) * FLAGS.epochs_per_eval)
     print('-' * 60)
 
+
     for key in sorted(results):
       print('%s: %s' % (key, results[key]))
+
+    print('loss he' + results["loss"])
 
 
 if __name__ == '__main__':
