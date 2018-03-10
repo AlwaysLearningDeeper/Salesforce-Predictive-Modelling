@@ -39,11 +39,11 @@ for type in TRAIN.dtypes:
         _CSV_COLUMN_DEFAULTS.append([1])
 
 parser.add_argument(
-    '--model_dir', type=str, default='/tmp/census_model',
+    '--model_dir', type=str, default='C:\\tmp\\wide_deep',
     help='Base directory for the model.')
 
 parser.add_argument(
-    '--model_type', type=str, default='wide',
+    '--model_type', type=str, default='wide_deep',
     help="Valid model types: {'wide deep wide_deep'}.")
 
 parser.add_argument(
@@ -164,21 +164,25 @@ def build_model_columns():
        Imp_Sal_04, Imp_Sal_05, Imp_Sal_06, Imp_Sal_07, Imp_Sal_08,
        Imp_Sal_09, Imp_Sal_10, Imp_Sal_11, Imp_Sal_12, Imp_Sal_13,
        Imp_Sal_14, Imp_Sal_15, Imp_Sal_16, Imp_Sal_17, Imp_Sal_18,
-       Imp_Sal_19, Imp_Sal_20, Imp_Sal_21, Ind_Prod_01, Ind_Prod_02,
-       Ind_Prod_03, Ind_Prod_04, Ind_Prod_05, Ind_Prod_06,
-       Ind_Prod_07, Ind_Prod_08, Ind_Prod_09, Ind_Prod_10,
-       Ind_Prod_11, Ind_Prod_12, Ind_Prod_13, Ind_Prod_14,
-       Ind_Prod_15, Ind_Prod_16, Ind_Prod_17, Ind_Prod_18,
-       Ind_Prod_19, Ind_Prod_20, Ind_Prod_21, Ind_Prod_22,
-       Ind_Prod_23, Ind_Prod_24, Num_Oper_01, Num_Oper_02,
-       Num_Oper_03, Num_Oper_04, Num_Oper_05, Num_Oper_06,
-       Num_Oper_07, Num_Oper_08, Num_Oper_09, Num_Oper_10,
-       Num_Oper_11, Num_Oper_12, Num_Oper_13, Num_Oper_14,
-       Num_Oper_15, Num_Oper_16, Num_Oper_17, Num_Oper_18,
-       Num_Oper_19, Num_Oper_20, Socio_Demo_01, Socio_Demo_02,
-       Socio_Demo_03, Socio_Demo_04, Socio_Demo_05
+       Imp_Sal_19, Imp_Sal_20, Imp_Sal_21
   ]
-  return wide_columns, wide_columns
+  deep_columns = [
+      Ind_Prod_01, Ind_Prod_02,
+      Ind_Prod_03, Ind_Prod_04, Ind_Prod_05, Ind_Prod_06,
+      Ind_Prod_07, Ind_Prod_08, Ind_Prod_09, Ind_Prod_10,
+      Ind_Prod_11, Ind_Prod_12, Ind_Prod_13, Ind_Prod_14,
+      Ind_Prod_15, Ind_Prod_16, Ind_Prod_17, Ind_Prod_18,
+      Ind_Prod_19, Ind_Prod_20, Ind_Prod_21, Ind_Prod_22,
+      Ind_Prod_23, Ind_Prod_24, Num_Oper_01, Num_Oper_02,
+      Num_Oper_03, Num_Oper_04, Num_Oper_05, Num_Oper_06,
+      Num_Oper_07, Num_Oper_08, Num_Oper_09, Num_Oper_10,
+      Num_Oper_11, Num_Oper_12, Num_Oper_13, Num_Oper_14,
+      Num_Oper_15, Num_Oper_16, Num_Oper_17, Num_Oper_18,
+      Num_Oper_19, Num_Oper_20, Socio_Demo_02,
+      Socio_Demo_03, Socio_Demo_04, Socio_Demo_05,
+      tf.feature_column.indicator_column(Socio_Demo_01),
+  ]
+  return wide_columns, deep_columns
 
 def build_estimator(model_dir, model_type):
   """Build an estimator appropriate for the given model type."""
@@ -188,14 +192,14 @@ def build_estimator(model_dir, model_type):
   # Create a tf.estimator.RunConfig to ensure the model is run on CPU, which
   # trains faster than GPU for this model.
   run_config = tf.estimator.RunConfig().replace(
-      session_config=tf.ConfigProto(device_count={'GPU': 0}))
+      session_config=tf.ConfigProto())#device_count={'GPU': 0}))
 
   if model_type == 'wide':
     print('Wide estimator')
     return tf.estimator.LinearRegressor(
         model_dir=model_dir,
-        feature_columns=wide_columns,
-        config=run_config)
+        feature_columns=wide_columns,config=run_config
+    )
   elif model_type == 'deep':
     print('Deep estimator')
     return tf.estimator.DNNRegressor(
@@ -210,35 +214,38 @@ def build_estimator(model_dir, model_type):
         linear_feature_columns=wide_columns,
         dnn_feature_columns=deep_columns,
         dnn_hidden_units=hidden_units,
-        config=run_config)
+        config=run_config,
+        #fix_global_step_increment_bug=True,
+        dnn_dropout=0.1,
+    )
 
-
-def input_fn(data_file, num_epochs, shuffle, batch_size):
-  """Generate an input function for the Estimator."""
-
-  def parse_csv(value):
-      print('Parsing', data_file)
-      columns = tf.decode_csv(value, record_defaults=_CSV_COLUMN_DEFAULTS)
-      features = dict(zip(_CSV_COLUMNS, columns))
-      labels = features.pop('Poder_Adquisitivo')
-      return features, labels
-
-  # Extract lines from input files using the Dataset API.
-  dataset = tf.data.TextLineDataset('../data/train3.csv')
-
-  #if shuffle:
-  #  dataset = dataset.shuffle(buffer_size=_SHUFFLE_BUFFER)
-
-  dataset = dataset.map(parse_csv, num_parallel_calls=5)
-
-  # We call repeat after shuffling, rather than before, to prevent separate
-  # epochs from blending together.
-  dataset = dataset.repeat(num_epochs)
-  dataset = dataset.batch(batch_size)
-
-  iterator = dataset.make_one_shot_iterator()
-  features, labels = iterator.get_next()
-  return features, labels
+#
+# def input_fn(data_file, num_epochs, shuffle, batch_size):
+#   """Generate an input function for the Estimator."""
+#
+#   def parse_csv(value):
+#       print('Parsing', data_file)
+#       columns = tf.decode_csv(value, record_defaults=_CSV_COLUMN_DEFAULTS)
+#       features = dict(zip(_CSV_COLUMNS, columns))
+#       labels = features.pop('Poder_Adquisitivo')
+#       return features, labels
+#
+#   # Extract lines from input files using the Dataset API.
+#   dataset = tf.data.TextLineDataset('../data/train3.csv')
+#
+#   #if shuffle:
+#   #  dataset = dataset.shuffle(buffer_size=_SHUFFLE_BUFFER)
+#
+#   dataset = dataset.map(parse_csv, num_parallel_calls=5)
+#
+#   # We call repeat after shuffling, rather than before, to prevent separate
+#   # epochs from blending together.
+#   dataset = dataset.repeat(num_epochs)
+#   dataset = dataset.batch(batch_size)
+#
+#   iterator = dataset.make_one_shot_iterator()
+#   features, labels = iterator.get_next()
+#   return features, labels
 
 def input_fn_train(): # returns x, y
     dict={}
@@ -284,10 +291,13 @@ def main(unused_argv):
       print('%s: %s' % (key, results[key]))
 
     print('loss he' + results["loss"])
-
+    model.export_savedmodel(
+        export_dir_base='C:\\tmp\\wide_deep_last',
+    )
 
 if __name__ == '__main__':
   tf.logging.set_verbosity(tf.logging.INFO)
   FLAGS, unparsed = parser.parse_known_args()
   tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
+
 
