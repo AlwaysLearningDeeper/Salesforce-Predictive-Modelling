@@ -264,7 +264,7 @@ def input_fn_eval(): # returns x, y
 
     return dict, tf.convert_to_tensor(np.array(TARGET_DEV))
 
-def input_fn_evaluate():
+def input_fn_predict():
     dict = {}
 
     for column in list(PREDICT.columns):
