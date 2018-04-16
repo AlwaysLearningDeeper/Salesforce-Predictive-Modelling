@@ -14,7 +14,7 @@ Our team consist of:
 * Javier Iranzo Sánchez  Intern @MLLP Research Group, UPV
 * Javier Rodríguez Domínguez Intern @ITI, UPV
 
-The contest consist of predicting the adquisitive power of a client, data was provided by Cajamar bank,it consisted of a collection of continous and categorial values were the parameter name was anonymized, doing the preprocessing of this data more difficult in terms of demographic analysis. The target it's calledPoder Adquisitivo and it's a continous value so we are facing a regression problem. 
+The contest consist of predicting the adquisitive power of a client, data was provided by Cajamar bank, it was a csv file with continous and categorial anonymized parameters, doing the preprocessing of this data more difficult in terms of demographic analysis. The target it's calledPoder Adquisitivo and it's a continous value so we are facing a regression problem. 
 
 We now present a brief explanation of our submission.
 
