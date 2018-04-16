@@ -1,5 +1,5 @@
 # Salesforce-Predictive-Modelling-Always Learning Deeper
-======
+
 AlwaysLearningDeeper submission for UniversityHack 2018 DATATHON
 
 ![ALD](assets/ALD.png)
