@@ -71,9 +71,9 @@ To our final model we used an ensemble between XGBoost and RandomForest (with hy
 
 When entering the prediction phase we wanted to ensure that we use the correct metrics to measure our problem (remember our outliers problem). We first started with the root-mean-square error (RMSE) but that's a outlier sensible metric so we changed to mean absolute error (MAE) where those outliers doesn't make a huge impact. We also used median absolute deviation (MAD) thanks to it's insensibilty to outliers, we tested both of our models with MAE and MAD. We can see some charts now with the results obtained:
 
-![MAE Results](assets/mae.png)
+![MAE Results](assets/mae.jpg)
 
-![MAD Results](assets/MAD.png)
+![MAD Results](assets/MAD.jpg)
 
 ## Conlusion
 
