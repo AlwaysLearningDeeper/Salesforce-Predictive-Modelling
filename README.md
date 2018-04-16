@@ -36,6 +36,7 @@ And also some others that didn't make an impact so we decided not to use them
 
 ## Training
 ![Piramid](assets/piramid.PNG)
+
 We have tried over 100 different models with more hyperparameter combinations but this is a selection:
 * Linear Regression 
 * Decision Tree
