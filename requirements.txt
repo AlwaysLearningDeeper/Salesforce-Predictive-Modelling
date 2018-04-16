@@ -1,3 +1,4 @@
+bayesian-optimization==0.6.0
 bleach==1.5.0
 certifi==2018.1.18
 chardet==3.0.4
@@ -49,6 +50,7 @@ Send2Trash==1.4.2
 simplegeneric==0.8.1
 six==1.11.0
 stopit==1.1.2
+tensorflow-gpu==1.4.0
 tensorflow-tensorboard==0.4.0
 terminado==0.8.1
 testpath==0.3.1
