@@ -9,14 +9,14 @@
 
 This project its the AlwaysLearningDeeper submission for UniversityHack 2018 DATATHON (http://www.cajamardatalab.com/datathon-cajamar-universityhack-2018/) a spanish national contest where only students can participate (from bachelor level to Phd).
 
-First we would like to introduce our team:
+Our team consist of:
 * Jaime Ferrando Huertas Data Scientist @Polystar, Stockholm
 * Javier Iranzo Sánchez  Intern @MLLP Research Group, UPV
 * Javier Rodríguez Domínguez Intern @ITI, UPV
 
-The three of us are students from UPV bachelors degree in computer science, all of us pursued the computing specialization even thought we started with data science projects before. We were excited about this contest as last year we couldn't pariticpate due to the non acceptance of bachelors students, something that has changed in this year edition.
+The contest consist of predicting the adquisitive power of a client, data was provided by Cajamar bank,it consisted of a collection of continous and categorial values were the parameter name was anonymized, doing the preprocessing of this data more difficult in terms of demographic analysis. The target it's calledPoder Adquisitivo and it's a continous value so we are facing a regression problem. 
 
-The contest consist of predicting the adquisitive power of a client, data was provided by Cajamar bank,it consisted of a collection of continous and categorial values were the parameter name was anonymized, doing the preprocessing of this data more difficult in terms of demographic analysis. The target it's calledPoder Adquisitivo and it's a continous value so we are facing a regression problem.
+We now present a brief explanation of our submission.
 
 
 ## Technologies used for this proyect:
@@ -97,3 +97,4 @@ Now that we finished the challenge we want to list the most important things to 
 * Distinguish between model selection and model optimization
 * RandomForest are now top of the art when facing regression problems
 
+We were want to express our how excited we were about this contest as last year we couldn't pariticpate due to the non acceptance of bachelors students, something that has changed in this year edition. It's been a pleasure to participate and we are looking forwards to next year edition.
