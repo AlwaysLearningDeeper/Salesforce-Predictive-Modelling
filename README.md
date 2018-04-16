@@ -1,14 +1,23 @@
 # Salesforce-Predictive-Modelling-Always Learning Deeper
 
-AlwaysLearningDeeper submission for UniversityHack 2018 DATATHON
+## AlwaysLearningDeeper submission for UniversityHack 2018 DATATHON, 2nd place
 
 ![ALD](assets/ALD.png)
 
-Jaime Ferrando Huertas Data Scientist@Polystar, Stockholm
 
-Javier Iranzo Sánchez  Intern@MLLP Research Group, UPV
+## Introduction
 
-Javier Rodríguez Domínguez Intern@ITI, UPV
+This project its the AlwaysLearningDeeper submission for UniversityHack 2018 DATATHON (http://www.cajamardatalab.com/datathon-cajamar-universityhack-2018/) a spanish national contest where only students can participate (from bachelor level to Phd).
+
+First we would like to introduce our team:
+* Jaime Ferrando Huertas Data Scientist @Polystar, Stockholm
+* Javier Iranzo Sánchez  Intern @MLLP Research Group, UPV
+* Javier Rodríguez Domínguez Intern @ITI, UPV
+
+The three of us are students from UPV bachelors degree in computer science, all of us pursued the computing specialization even thought we started with data science projects before. We were excited about this contest as last year we couldn't pariticpate due to the non acceptance of bachelors students, something that has changed in this year edition.
+
+The contest consist of predicting the adquisitive power of a client, data was provided by Cajamar bank,it consisted of a collection of continous and categorial values were the parameter name was anonymized, doing the preprocessing of this data more difficult in terms of demographic analysis. The target it's calledPoder Adquisitivo and it's a continous value so we are facing a regression problem.
+
 
 ## Technologies used for this proyect:
 *  Python
@@ -67,7 +76,7 @@ Therefore we want to buil a combination of models where some model errors can be
 
 To our final model we used an ensemble between XGBoost and RandomForest (with hyperparameters optimizied by bayesian optimization). Two of the best models right now for regression problems.
 
-## Predicting
+## Prediction
 
 When entering the prediction phase we wanted to ensure that we use the correct metrics to measure our problem (remember our outliers problem). We first started with the root-mean-square error (RMSE) but that's a outlier sensible metric so we changed to mean absolute error (MAE) where those outliers doesn't make a huge impact. We also used median absolute deviation (MAD) thanks to it's insensibilty to outliers, we tested both of our models with MAE and MAD. We can see some charts now with the results obtained:
 
