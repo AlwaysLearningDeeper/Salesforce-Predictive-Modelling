@@ -7,12 +7,12 @@
 
 ## Introduction
 
-This project is the AlwaysLearningDeeper submission for UniversityHack 2018 DATATHON(http://www.cajamardatalab.com/datathon-cajamar-universityhack-2018/) a Spanish national contest where only students can participate (from Bachelor level to Phd).
+This project is the AlwaysLearningDeeper submission for [UniversityHack 2018 DATATHON](http://www.cajamardatalab.com/datathon-cajamar-universityhack-2018/) a Spanish national contest where only students can participate (from Bachelor level to Phd).
 
 Our team consists of:
-* Jaime Ferrando Huertas Data Scientist @Polystar, Stockholm
-* Javier Iranzo Sánchez  Reseach Intern @MLLP Research Group, UPV
-* Javier Rodríguez Domínguez Intern @ITI, UPV
+* [Jaime Ferrando Huertas](https://github.com/jiwidi) Data Scientist @Polystar, Stockholm
+* [Javier Iranzo Sánchez](https://github.com/jairsan) Reseach Intern @MLLP Research Group, UPV
+* [Javier Rodríguez Domínguez](https://github.com/zhonskate) Intern @ITI, UPV
 
 The goal for the Salesforce Predictive Modelling track was to predict the purchasing power of a client, using data provided by Spanish bank Cajamar. 
 
