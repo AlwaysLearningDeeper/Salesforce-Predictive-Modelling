@@ -39,7 +39,7 @@ The following methods reported increases in performance:
 * Group values with a large number of instances in these categorical variables, in order to reduce the dimensionality of the one-hot vector
 * Delete the index variable ID Customer
 
-The following techniques didn't have a positive impact so we decided not to use them
+The following techniques didn't have a positive impact so we decided not to use them:
 * Eliminate outliers
 * Use scaling
 * Model differently outliers and normal clients
@@ -61,7 +61,7 @@ We have tried more than 100 different models and hyperparameter combinations, su
 ### Optimizing hyperparameters
 
 After trying all the possible models and selecting the ones with best results we moved to optimize the hyperparameters of those models. This can be seen as optimizing a function whose input are the hyperparameters and whose output is the model performance measure. Optimizing this function is hard to due the following problems:
-* The function is very expensive to sample because we need to train a new model each time.
+* The function is very expensive to sample because we need to train a new model each time
 * We have an infinite number of possible hyperparameters 
 * We do not know the interactions between these hyperparameters
 
@@ -93,10 +93,10 @@ Our finals results for 5-fold Cross-Validation are as follows:
 * MAE of 4318 euros
 * MAD of 2028 euros
 
-Now that we have finished the challenge we want to list the most important things to do when facing a problem of this kind. Some of them were learnt during the challenge, apart from the ones we knew beforehand.
+Now that we have finished the challenge we want to list the most important things to do when facing a problem of this kind. Some of them were learnt during the challenge, apart from the ones we knew beforehand:
 
-* Do an exhaustive study of the data distribution.
-* Spend time with data preprocessing, it is what usually makes the difference, as nowadays models are being easier to implement.
+* Perform an exhaustive study of the data distribution
+* Spend time with data preprocessing, it is what usually makes the difference, as nowadays models are being easier to implement
 * Distinguish between model selection and model optimization
 * RandomForest models can obtain state of the art results when facing regression problems
 
