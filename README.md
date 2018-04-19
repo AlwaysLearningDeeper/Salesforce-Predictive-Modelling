@@ -32,7 +32,7 @@ Here we show a brief explanation of our submission, based on the slides presente
 ## Data processing
 ![Poder adquisitivo](assets/dist_valor_adq.png)
 
-This variable presents a distribution with a few clients with very different values from the mean. We can consider those values as outliers, as they will be a source of problems.
+This variable presents a distribution with a few clients that have very different values from the mean. We can consider these values as outliers, as they will be a source of problems.
 
 The following methods reported increases in performance:
 * Transform categorical variables into one-hot vectors
