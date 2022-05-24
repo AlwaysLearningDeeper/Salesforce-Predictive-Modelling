@@ -50,7 +50,7 @@ Send2Trash==1.4.2
 simplegeneric==0.8.1
 six==1.11.0
 stopit==1.1.2
-tensorflow-gpu==1.15.2
+tensorflow-gpu==2.6.4
 tensorflow-tensorboard==0.4.0
 terminado==0.8.1
 testpath==0.3.1
